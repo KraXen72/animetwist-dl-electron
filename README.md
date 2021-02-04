@@ -13,10 +13,6 @@ an easy to use downloader from twist.moe.
 - Progress on your downloads
 
 ## Installation
-### Releases
-[https://github.com/KraXen72/animetwist-dl-electron/releases](https://github.com/KraXen72/animetwist-dl-electron/releases)
-you still need to manually install youtube-dl with ``python pip install youtube_dl`` or [download a binary](http://youtube-dl.org) and install it
-
 ### From source
 requirements:
 - nodejs - [download](https://nodejs.org/en/)
@@ -25,6 +21,7 @@ requirements:
 then:
   
 - install with ``npm install animetwist-dl-electron`` in the folder you want to install it
-- open terminal in the folder and run ``cd node_modules && cd animetwist-dl-electron && npm start``
+- open terminal in the folder and run ``npm start``
   
 please report any issues regarding installation in the issues
+
