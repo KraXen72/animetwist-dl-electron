@@ -1,5 +1,5 @@
 const { app, BrowserWindow, Menu, globalShortcut } = require('electron')
-const path = require('path')
+const path = require("path")
 
 function createWindow () {
   const win = new BrowserWindow({
@@ -13,6 +13,7 @@ function createWindow () {
   })
   
   win.loadFile('index.html')
+  console.log("created a window")
 }
 
 app.whenReady().then(createWindow)
