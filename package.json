@@ -1,0 +1,49 @@
+{
+  "_from": "animetwist-dl-electron",
+  "_id": "animetwist-dl-electron@1.0.4",
+  "_inBundle": false,
+  "_integrity": "sha512-UNSfbQKEmOk74St4FptjZp6K8+xkekvE2vdImnhFpky0EVRhGZE/CYTGQKeFT5V/Wn6sPRCaIPnJDL0p7jUIng==",
+  "_location": "/animetwist-dl-electron",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "animetwist-dl-electron",
+    "name": "animetwist-dl-electron",
+    "escapedName": "animetwist-dl-electron",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/animetwist-dl-electron/-/animetwist-dl-electron-1.0.4.tgz",
+  "_shasum": "d56babacfb5efdeba2dd59cb3500a4610f152e3c",
+  "_spec": "animetwist-dl-electron",
+  "_where": "D:\\coding\\animetwist-dl-electron\\npm",
+  "author": "",
+  "bundleDependencies": false,
+  "dependencies": {
+    "crypto-js": "^4.0.0",
+    "electron": "^11.2.2",
+    "youtube-dl-wrap": "^2.0.0"
+  },
+  "deprecated": false,
+  "description": "an electron anime downloader from twist.moe, using twist-dl and youtube-dl",
+  "devDependencies": {
+    "crypto-js": "^4.0.0",
+    "electron": "^11.2.2",
+    "youtube-dl-wrap": "^2.0.0"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "main": "main.js",
+  "name": "animetwist-dl-electron",
+  "productName": "AnimeTwist Downloader",
+  "scripts": {
+    "start": "electron ."
+  },
+  "version": "1.0.4"
+}

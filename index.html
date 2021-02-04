@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>twist-dl gui</title>
+    <link rel="stylesheet" href="matter.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body style="background: white;">
+    <div class="w3-container main">
+        <h1>twist.moe downloader</h1>
+        <article>
+            <label class="matter-checkbox">
+                <input type="checkbox" id="langselect">
+                <span class="noselect">Search in english</span>
+            </label>
+            <span class="noselect" style="float: right;" id="wait-msg">Getting list of anime from <span class="hl">twist.moe</span>..</span>
+            <label class="matter-textfield-outlined search">
+                <input placeholder = " " id="search" type="text" autocomplete="off" spellcheck="false" disabled>
+                <span class="noselect">Search anime</span>
+                <ul id="suggestions-ul">
+                    <!--
+                    <li class="inline-suggestion">Rascal Does not dream of a bunny girl senpai<li/>
+                    <li class="inline-suggestion">Rent a girlfriend<li/>
+                    <li class="inline-suggestion">Attack on titan<li/>
+                    -->
+                </ul>
+            </label>
+            <span class="ep">
+                <label class="matter-textfield-outlined">
+                    <input placeholder=" " id="first-ep"> 
+                    <span class="noselect" id="first-ep-label">first episode</span>
+                </label>
+                <label class="matter-textfield-outlined">
+                    <input placeholder=" " id="last-ep">
+                    <span class="noselect" id="last-ep-label">last episode</span>
+                </label>
+                <button class="matter-button-outlined gen" id="path">Select folder</button>
+                <button class="matter-button-outlined gen" id="gen">Download</button>
+            </span>
+            <div id="dltofolder"><span class="hl">Downloading to: </span><span id="dlpath">No folder selected</span></div>
+            <div class="dl-wrapper">
+                <hr>
+                <span class = "dl-info">
+                    <span><span class="hl dl-message">Downloading:</span> <span class="dl-animename">~</span> <span class="dl-range">1-12</span></span> - 
+                    <span><span id="eps-done">0</span> episodes finished</span>
+                </span>
+                <div class="dl-item">
+                    <div><span id="dl-filename">[HorribleSubs] One-Punch Man - 01 [1080p].mp4</span><label style="float: right" id="percentage">0%</label></div> 
+                    <div class="dl-progress-div"><progress type="range" value="0" min="0" max="100" id="progress-progress"></progress></div>
+                </div>
+            </div>
+            
+        </article>
+        <button class="info-button">&#x1F6C8;</button>
+    </div>
+</body>
+</html>
