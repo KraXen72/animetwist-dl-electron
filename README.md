@@ -15,7 +15,7 @@ an easy to use downloader from twist.moe.
 ## Installation
 ### Releases
 [https://github.com/KraXen72/animetwist-dl-electron/releases](https://github.com/KraXen72/animetwist-dl-electron/releases)
-you still need to manually install youtube-dl with ``python pip install youtube_dl`` or [download a binary](http://youtube-dl.org) and install it
+you still need to manually install youtube-dl with ``python pip install youtube_dl`` or [download a binary](http://youtube-dl.org) and [add it to path](https://techwombat.com/how-to-use-youtube-dl-to-download-videos-from-youtube-on-windows/)
 
 ### From source
 requirements:
@@ -24,7 +24,7 @@ requirements:
   
 then:
   
-- install with ``npm install animetwist-dl-electron`` in the folder you want to install it
-- open terminal in the folder and run ``cd node_modules && cd animetwist-dl-electron && npm start``
+- install with ``npm install -g animetwist-dl-electron`` in the folder you want to install it
+- open terminal anywhere and run ``animetwist``
   
 please report any issues regarding installation in the issues
