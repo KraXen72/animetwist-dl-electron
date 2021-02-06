@@ -2,16 +2,19 @@
 const 
     electron = require('electron').remote,
     dialog = electron.dialog,
-    Menu = electron.Menu,
     YoutubeDlWrap = require("youtube-dl-wrap"),
     crypto = require('crypto-js'),
-    aes = require('crypto-js/aes')
+    aes = require('crypto-js/aes'),
+    util = require('util'),
+    exec = util.promisify(require('child_process').exec),
+    os = require('os')
 
 //defining of varialbes
 var 
     allAnime = {},
     downloadQueue = [],
     currentSlug = "",
+    youtubeDlWrap,
     //elements
     genButton,
     searchElem
@@ -33,12 +36,26 @@ var keys = {
   RIGHT: 39,
   DOWN: 40
 };
-const youtubeDlWrap = new YoutubeDlWrap();
 
+youtubeDlWrap = new YoutubeDlWrap();
 window.addEventListener('DOMContentLoaded', () => {
   (async () => {
     console.log("loaded")
 
+    //try to see if youtube is installed
+    console.log("testing if youtube-dl is installed")
+    let ytdl = await getYoutubeDl()
+    console.log(ytdl == true ? "youtube-dl is installed" : "youtube-dl is not installed")
+    if (ytdl == false) {
+      let platform = os.platform()
+     
+      console.log(`installing youtube-dl for ${platform}...`)
+      let variant = platform.includes("win") ? "youtube-dl.exe" : "youtube-dl"
+      await YoutubeDlWrap.downloadFromWebsite(variant, platform);
+      console.log(`installed ${variant}`)
+      window.location.reload() //reload after install
+    }
+    
     //wait 5seconds to get anime, otherwise retry
     let retry = setTimeout(() => {window.location.reload()}, 5000)
     allAnime = await getJSON('/api/anime') 
@@ -107,6 +124,19 @@ window.addEventListener('DOMContentLoaded', () => {
   })();
 })
 
+//see if youtube-dl is installed
+async function getYoutubeDl() {
+  var installed = true
+  try {
+    const { stdout, stderr } = await exec('youtube-dl --version');
+    console.log("youtube-dl version: " + stdout)
+  } catch (e) {
+    installed = false
+  }
+  return installed
+}
+
+//find matches in an array
 function findMatches(wordToMatch, all, lang) {
   let searchTitle = lang == "j" ? "title" : "alt_title"
   return all.filter(name => {
@@ -116,6 +146,7 @@ function findMatches(wordToMatch, all, lang) {
   })
 }
 
+//autocomplete: display matches from findmatches()
 function displayMatches() {
   //search in english selection
   let checkbox = document.getElementById("langselect")
@@ -274,7 +305,7 @@ async function downloadNext(from, to) {
 async function downloadEpisode(link, dest, from, to) {
   console.log("started downloading " + link + " to: " + dest)
   let youtubeDlEmitter = youtubeDlWrap.exec([link,
-    "--referer", "https://twist.moe", "-o", `${dest}`]) //implement output
+    "--referer", "https://twist.moe", "-o", `${dest}`, "--retries", "infinite", "--fragment-retries", "infinite"]) //implement output
   .on("progress", (progress) => {
     //console.log(progress.percent, progress.totalSize, progress.currentSpeed, progress.eta))
     let perc = progress.percent
@@ -283,7 +314,11 @@ async function downloadEpisode(link, dest, from, to) {
     document.getElementById("progress-progress").value = perc
   })
   //.on("youtubeDlEvent", (eventType, eventData) => console.log(eventType, eventData))
-  .on("error", (error) => console.error(error))
+  .on("error", (error) => {
+    let handle = document.getElementById("errorhandling")
+    handle.style.display = "initial";
+    console.error(error)
+  })
   .on("close", () => {
     document.getElementById("percentage").innerText = `100%`
     document.getElementById("progress-progress").value = 100
@@ -315,6 +350,7 @@ function shortenFilename(str, len) {
   } else {return str}
 }
 
+//what to do when all downloads are completed
 function allDownloadsCompleted() {
   document.querySelector('.dl-info').innerHTML = `<span class="hl">All downloads completed.</span>`
   document.querySelector('#dltofolder .hl').innerText = `Downloaded to: `

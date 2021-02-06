@@ -153,6 +153,11 @@ hr {
     color: #4f4f50;
 }
 
+/*error handling*/
+#errorhandling {
+    display: none;
+}
+
 /*small extract from w3 css*/
 html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}
 /* Extract from normalize.css by Nicolas Gallagher and Jonathan Neal git.io/normalize */
