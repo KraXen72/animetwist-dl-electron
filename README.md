@@ -15,16 +15,16 @@ an easy to use downloader from twist.moe.
 ## Installation
 ### Releases
 [https://github.com/KraXen72/animetwist-dl-electron/releases](https://github.com/KraXen72/animetwist-dl-electron/releases)
-you still need to manually install youtube-dl with ``python pip install youtube_dl`` or [download a binary](http://youtube-dl.org) and [add it to path](https://techwombat.com/how-to-use-youtube-dl-to-download-videos-from-youtube-on-windows/)
 
 ### From source
 requirements:
 - nodejs - [download](https://nodejs.org/en/)
-- youtube-dl - either [download a binary](http://youtube-dl.org) or ``python pip install youtube_dl``
+  
+this downloader uses [youtube-dl](https://youtube-dl.org) to download. it *should* detect if you have it and install it in the background if needed, but if you have problems with downloading anime, (especially on linux), install it yourself with ``pip install youtube-dl``
   
 then:
   
-- install with ``npm install -g animetwist-dl-electron`` in the folder you want to install it
-- open terminal anywhere and run ``animetwist``
+- install with ``npm install -g animetwist-dl-electron``
+- open terminal, rofi, start or anything type ``animetwist``
   
 please report any issues regarding installation in the issues
