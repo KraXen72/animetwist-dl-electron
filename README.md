@@ -1,8 +1,6 @@
 # twist.moe / AnimeTwist downloader
-
 an easy to use downloader from twist.moe.  
 ![img](https://cdn.discordapp.com/attachments/704792091955429426/806973238638542939/Rec_2021_02.04_2042.gif)
-
 ## Features
 - Downloading high quality anime from https://twist.moe
 - Clean material design interface
@@ -13,15 +11,18 @@ an easy to use downloader from twist.moe.
 - Progress on your downloads
 
 ## Installation
+### Releases
+[https://github.com/KraXen72/animetwist-dl-electron/releases](https://github.com/KraXen72/animetwist-dl-electron/releases)
+
 ### From source
 requirements:
 - nodejs - [download](https://nodejs.org/en/)
-- youtube-dl - either [download a binary](http://youtube-dl.org) or ``python pip install youtube_dl``
-  
-then:
-  
-- install with ``npm install animetwist-dl-electron`` in the folder you want to install it
-- open terminal in the folder and run ``npm start``
-  
-please report any issues regarding installation in the issues
 
+this downloader uses [youtube-dl](https://youtube-dl.org) to download. it *should* detect if you have it and install it in the background if needed, but if you have problems with downloading anime, (especially on linux), install it yourself with ``pip install youtube-dl``
+
+then:
+
+- install with ``npm install -g animetwist-dl-electron``
+- open terminal, rofi, start or anything type ``animetwist``
+
+please report any issues regarding installation in the issues
