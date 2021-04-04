@@ -1,5 +1,5 @@
 {
-  "author": "",
+  "author": "KraXen72",
   "bundleDependencies": false,
   "dependencies": {
     "crypto-js": "^4.0.0",
@@ -24,5 +24,5 @@
   "bin": {
     "animetwist": "./start.js"
   },
-  "version": "1.1.1"
+  "version": "1.1.2"
 }

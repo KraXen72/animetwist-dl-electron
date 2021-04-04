@@ -25,6 +25,9 @@
                     <li class="inline-suggestion">Attack on titan<li/>
                     -->
                 </ul>
+                <div class="suggestions-preview-image">
+                    <img id="preview-img" draggable="false">
+                </div>
             </label>
             <span class="ep">
                 <label class="matter-textfield-outlined">
@@ -50,6 +53,19 @@
                     <div><span id="dl-filename">[HorribleSubs] One-Punch Man - 01 [1080p].mp4</span><label style="float: right" id="percentage">0%</label></div> 
                     <div class="dl-progress-div"><progress type="range" value="0" min="0" max="100" id="progress-progress"></progress></div>
                 </div>
+            </div>
+            <span style="display: none;">
+                <label class="matter-checkbox">
+                    <input type="checkbox" id="yugenselect">
+                    <span class="noselect">Download missing from yugenani.me</span>
+                </label>
+                <button class="incognito" id="yugen-whats-this">what's this?</button>
+            </span>
+            <div id="yugen-wrapper" style="display: none;">
+                <button class="matter-button-outlined" id="yugensearch" style="display: none">search</button>
+                <span id="yugen-results-num"></span>
+                <button class="matter-button-outlined" id="pickresult" style="display: none">Select which one</button>
+                <div id="yugen-url"></div>
             </div>
             
         </article>

@@ -17,7 +17,8 @@ var
     youtubeDlWrap,
     //elements
     genButton,
-    searchElem
+    searchElem,
+    yugenurl
 
 //constants
 const
@@ -42,27 +43,6 @@ window.addEventListener('DOMContentLoaded', () => {
   (async () => {
     console.log("loaded")
 
-    //try to see if youtube is installed
-    console.log("testing if youtube-dl is installed")
-    let ytdl = await getYoutubeDl()
-    console.log(ytdl == true ? "youtube-dl is installed" : "youtube-dl is not installed")
-    if (ytdl == false) {
-      let platform = os.platform()
-     
-      console.log(`installing youtube-dl for ${platform}...`)
-      let variant = platform.includes("win") ? "youtube-dl.exe" : "youtube-dl"
-      await YoutubeDlWrap.downloadFromWebsite(variant, platform);
-      console.log(`installed ${variant}`)
-      window.location.reload() //reload after install
-    }
-    
-    //wait 5seconds to get anime, otherwise retry
-    let retry = setTimeout(() => {window.location.reload()}, 5000)
-    allAnime = await getJSON('/api/anime') 
-    clearTimeout(retry)
-    document.getElementById('wait-msg').remove()
-    document.getElementById('search').removeAttribute('disabled')
-    
     //search
     searchElem = document.getElementById('search')
     searchElem.addEventListener('input', displayMatches);
@@ -77,6 +57,60 @@ window.addEventListener('DOMContentLoaded', () => {
       searchElem.value = ""
     })
 
+    //yugenanime stuff
+    //checkbox
+    /*document.getElementById("yugenselect").addEventListener("change", () => {
+      let check = document.getElementById("yugenselect")
+      let yugenwrap = document.getElementById("yugen-wrapper")
+      if (check.checked) {
+        yugenwrap.style.display="block"
+      } else {
+        yugenwrap.style.display="none"
+      }
+    })*/
+    //search
+    /*
+    document.getElementById("yugensearch").addEventListener("click", async () => {
+      let inpval = document.getElementById("search").value
+      let query = inpval.replaceAll(" ", "+")
+      let url = `https://yugenani.me/search/?q=${query}`
+      let response = await fetch(url)
+      let html = await response.text()
+      let searchdom = new DOMParser().parseFromString(html, "text/html")
+      let resultshtml = searchdom.querySelectorAll(".anime-meta")
+      let results = []
+      resultshtml.forEach(result => {
+        let url = result.href.toString().split("/anime/")
+
+        let parsediv = new DOMParser().parseFromString(result.innerHTML, "text/html").body.firstElementChild.querySelector("img")
+        //console.log(parsediv)
+        let img = parsediv.getAttribute("data-src")
+        let title = parsediv["title"]
+        let alt = parsediv["alt"]
+
+        let item = {
+          title: title,
+          img: img,
+          alt: alt,
+          url: "https://yugenani.me/anime/" + url[1]
+        }
+        results.push(item)
+      })
+      document.getElementById("yugen-results-num").innerText = `Searched yugenani.me: ${results.length} results found for '${shortenFilename(inpval, 19)}'.`
+      if (results.length > 0){document.getElementById("pickresult").style.display = "inline-block";}
+      console.log(results)
+
+      let pick = document.getElementById("pickresult")
+      pick.replaceWith(pick.cloneNode(true));
+      pick = document.getElementById("pickresult")
+      pick.addEventListener("click", () => {displayYugenResults(results)})
+    })
+    document.getElementById("yugen-whats-this").addEventListener("click", () => {
+      let text = "in the event of some episode not being available on twist.moe, this will try to download them from yugenanime" + "\n" + 
+      `this only works as long as select your anime also on yugenani.me and the missing episode is available on yugenani.me`
+      alert(text)
+    })
+    */
     //generate links button
     genButton = document.getElementById('gen')
     genButton.addEventListener('click',() => {
@@ -85,9 +119,11 @@ window.addEventListener('DOMContentLoaded', () => {
         let fromep = document.getElementById("first-ep").value
         let toep = document.getElementById("last-ep").value
 
-        console.log(`animename: ${animename}, fromep: ${fromep}, toep: ${toep}`)
+        //let yugencheck = document.getElementById('yugenselect')
 
+        console.log(`animename: ${animename}, fromep: ${fromep}, toep: ${toep}`)
         generateAndDownload(currentSlug, fromep, toep)
+
       } else {
         console.log("can't generate, no anime selected.")
       }
@@ -121,8 +157,94 @@ window.addEventListener('DOMContentLoaded', () => {
       `
       alert(info)
     })
+
+    //try to see if youtube is installed
+    console.log("testing if youtube-dl is installed")
+    let ytdl = await getYoutubeDl()
+    console.log(ytdl == true ? "youtube-dl is installed" : "youtube-dl is not installed")
+    if (ytdl == false) {
+      let platform = os.platform()
+
+      if (platform.includes("win") == false) {
+        let notice = document.createElement("div")
+        notice.innerHTML = 
+        `
+        <div class="notice-bg">
+          <div class="notice">
+            <h1>Non-windows os detected. (<code>${platform}</code>)</h1>
+            The internal installation of the <code>youtube-dl</code> package doesen't work reliably on non-windows operating systems. <br>
+            Please install <code>youtube-dl</code> through <code>pip</code> using <code>pip install youtube-dl</code> <br>
+            (requires python) or any other method so <code>youtube-dl</code> is recognized as a global command.
+          </div>
+        </div>
+        `
+        document.body.appendChild(notice)
+      } else {
+        console.log(`installing youtube-dl for ${platform}...`)
+        let variant = platform.includes("win") ? "youtube-dl.exe" : "youtube-dl"
+        await YoutubeDlWrap.downloadFromWebsite(variant, platform);
+        console.log(`installed ${variant}`)
+        window.location.reload() //reload after install
+      }
+    }
+
+    //get all anime from twist.moe
+    getAnime()
   })();
 })
+
+//display the results from yugenanime search
+function displayYugenResults(results) {
+  let notice = document.createElement("div")
+  let res = ""
+  results.forEach(result => {
+    res += `
+    <div class="yugen-result" url="${result.url}">
+      <div class="yugen-img">
+        <a class="yugen-a">
+          <img src="${result.img}" draggable="false">
+        </a>
+      </div>
+      <p class="yugen-result-title">${result.title}</p>
+    </div>
+    
+    `
+  })
+  notice.innerHTML = 
+  `
+  <div class="notice-bg">
+    <div class="notice">
+      <h3>Select your your anime on yugenani.me <strong id="yugen-close" onclick="this.parentElement.parentElement.parentElement.remove()">&times;</strong></h3>
+      <div class="yugen-scroller">
+        <div class="yugen-results">
+        ${res}
+        </div>
+      </div>
+    </div>
+  </div>
+  `
+  document.body.appendChild(notice)
+
+  let as = document.querySelectorAll(".yugen-result").forEach(a => {
+    a.addEventListener('click', () => {
+      yugenurl = a.getAttribute("url")
+      document.getElementById("yugen-url").innerText = "Selected: " + shortenFilename(a.querySelector('p').innerText, 50)
+      document.getElementById("yugen-results-num").innerHTML = ""
+      document.getElementById('pickresult').style.display = "none";
+      document.getElementById("yugen-close").click()
+    })
+  })
+}
+
+//inital get Anime
+async function getAnime() {
+  //wait 5seconds to get anime, otherwise retry
+  let retry = setTimeout(() => {window.location.reload()}, 5000)
+  allAnime = await getJSON('/api/anime')
+  clearTimeout(retry)
+  document.getElementById('wait-msg').remove()
+  document.getElementById('search').removeAttribute('disabled')
+}
 
 //see if youtube-dl is installed
 async function getYoutubeDl() {
@@ -156,16 +278,17 @@ function displayMatches() {
   var matchArray = findMatches(this.value, allAnime, lang)
   if (this.value == "") {matchArray = [];}
 
-  const html = matchArray.slice(0, 10).map((anime, index) => { //only return first five animes
-    const regex = new RegExp(this.value, 'gi')
-    if (anime.alt_title == null){anime.alt_title = anime.title}
-    const query = anime[searchTitle].replace(regex, `<span class="hl">${anime[searchTitle].match(new RegExp(this.value, 'i'))}</span>`)
-    return `<li class="inline-suggestion" anime-index="${allAnime.indexOf(anime)}">
+  const html = matchArray.slice(0, 10).map((anime, index) => { //only return first 10 anime
+    const regex = new RegExp(this.value, 'gi') //global, case-insensitive
+    if (anime.alt_title == null){anime.alt_title = anime.title} //if english isnone, then just use the japanese one
+    const query = anime[searchTitle].replace(regex, `<span class="hl">${anime[searchTitle].match(new RegExp(this.value, 'i'))}</span>`) //highlight the part of the word that we searched
+    return `<li class="inline-suggestion" anime-index="${allAnime.indexOf(anime)}" mal-id="${anime.mal_id}" kitsu-id="${anime.hb_id}">
       ${query}
     <li/>`
   })
   const suggestUl = document.getElementById('suggestions-ul')
   suggestUl.innerHTML = html.join("")
+  document.getElementById("preview-img").setAttribute("src","")
 
   //handle clicking on search suggestions
   const currSuggestions = document.getElementsByClassName('inline-suggestion')
@@ -175,6 +298,8 @@ function displayMatches() {
       currentSlug = animeObj.slug.slug
       let sourceList = await getJSON(`/api/anime/${currentSlug}/sources`)
       //console.log(sourceList)
+      let kitsuid = currSuggestions[i].getAttribute("kitsu-id");
+      getThumb(kitsuid, currSuggestions[i])
 
       let startlabel = document.getElementById("first-ep-label")
       let endlabel = document.getElementById("last-ep-label")
@@ -187,9 +312,11 @@ function displayMatches() {
       startlabel.innerText = `first episode (1-${sourceList.length})`
       endlabel.innerText = `last episode (1-${sourceList.length})`
       
-
       searchElem.value = currSuggestions[i].innerText
       suggestUl.innerHTML = ""
+      /*if (document.getElementById("yugenselect").checked) {
+        document.getElementById("yugensearch").click()
+      }*/
     })
   }
 
@@ -218,7 +345,7 @@ function doKeypress(keys, event) {
 }
 
 //move up or down the selection in autocomplete
-function moveSelect(mode) {
+async function moveSelect(mode) {
   let highlight = document.querySelector('.highlight')
   const currSuggestions = document.getElementsByClassName('inline-suggestion')
   var highlightIndex
@@ -246,6 +373,29 @@ function moveSelect(mode) {
   //add the highlight to the new element and remove it from the old one
   currSuggestions[highlightIndex].classList.remove('highlight')
   currSuggestions[newIndex].classList.add('highlight')
+
+  let cover = currSuggestions[newIndex].getAttribute("cover")
+
+  if (cover == null) {
+    let kitsuid = currSuggestions[newIndex].getAttribute("kitsu-id");
+    getThumb(kitsuid, currSuggestions[newIndex]);
+  } else {
+    document.getElementById("preview-img").setAttribute("src",cover)
+  }
+}
+
+//get the pic of the anime
+async function getThumb(id, elem) {
+  //use kitsu api to get the anime's thumbnail from myanimelist
+  let url = `https://kitsu.io/api/edge/anime/${id}`
+  let request = await fetch(url)
+  let pics = await request.json()
+
+  let thumb = pics.data.attributes.posterImage.medium
+
+  //console.log(thumb)
+  document.getElementById("preview-img").setAttribute("src",thumb)
+  elem.setAttribute("cover",thumb) //set the attribute to the image, so next time there is no need to fetch
 }
 
 //genereate links 
