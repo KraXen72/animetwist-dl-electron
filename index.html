@@ -9,23 +9,45 @@
         <link rel="stylesheet" href="main.css">
     </head>
     <body>
-        <div id="main-grid">
+        <div id="main-grid" class="ncollapsed-dl">
             <div id="sidebar">
-                <div id="nameHolder"><h4>Impaler</h4></div>
                 <div id="dl-options"></div>
                 <div id="sources"></div>
             </div>
-            <div id="main-screen">
-                <div id="searchHolderbg"></div>
+            <div id="nameHolder" class="noselect"><h4>Impaler</h4></div>
+            <div id="searchHolderbg"></div>
                 <div id="searchHolder">
-                    <label class="matter-textfield-outlined">
-                        <input placeholder=" "/>
-                        <span>Search anime</span>
+                    <label class="matter-textfield-outlined" id = "search-label">
+                        <input placeholder=" "/ id="search">
+                        <span id="search-span noselect">Search anime</span>
                     </label>
                 </div>
-                <div id="primaryPick"></div>
-                <div id="secondaryPick"></div>
+            <div id="main-screen">
+                <div id="primaryPick" class="sourcepick">
+                    <h5 class="src-title">1. <strong>Primary source:</strong> pick the show you meant <span class="src-title-source">(twist.moe)</span></h5>
+                    <div class="previewHolder" id="prevhold1">
+                        <img src="thumb.jpg" alt="" id="prev1" class="previmg noselect" draggable="false">
+                    </div>
+                    <ul id="src-pick1" class="src-pick">
+                        <li class="src-pick-li">One Piece</li>
+                        <li class="src-pick-li">One Piece</li>
+                    </ul>
+
+                </div>
+                <div id="secondaryPick" class="sourcepick">
+                    <h5 class="src-title">2. <strong>Secondary source:</strong> pick the show you meant <span class="src-title-source">(yugenani.me)</span></h5>
+                    <div class="previewHolder" id="prevhold2">
+                        <img src="thumb.jpg" alt="" id="prev2" class="previmg noselect" draggable="false">
+                    </div>
+                    <ul id="src-pick2" class="src-pick">
+                        <li class="src-pick-li">One Piece</li>
+                        <li class="src-pick-li">One Piece</li>
+                    </ul>
+
+
+                </div>
             </div>
+            <div id="dlnameHolder" class="noselect"><h4>Downloads</h4></div>
             <div id="download-queue"></div>
         </div>
     </body>
