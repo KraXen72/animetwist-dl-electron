@@ -1,322 +1,84 @@
 :root {
-    --grayborder: 1px solid #a3a5aa79;
+    --bradius: 1.3rem;
 }
-body {
-    background: #222222 !important;
+
+#main-grid {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: minmax(18rem, 25%) 1fr minmax(18rem, 25%);
+
+    height: 100vh;
+    width: 100vw;
 }
-.search, .suggestions, .results {
-    width: 100%;
-    resize: none;
+#main-grid *, .popup-body * {
+    --matter-helper-theme: 165, 117, 98 !important;
+    --matter-onsurface-rgb: 163, 165, 170 !important;
 }
-.main, .notice {
-    width: 60%;
-    min-width: 665px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #262626;
-    color: #a3a5aa;
-    padding: 10px;
-    border-radius: 5px;
+/*top level*/
+#sidebar {
+    grid-column: 1 / 2;
+    background: teal;
+    display: grid;
+    grid-template: 4.25rem 1fr 1fr / 1fr; /*change 4.25fr to max-content later*/
 }
-.notice {
-    z-index: 3;
-    width: 50%;
-    background: #232323;
+#main-screen {
+    grid-column: 2 / 3;
+    background: var(--bg-secondary);
+    display: grid;
+    grid-template: 4.25rem 1fr 1fr / 1fr; /*change 4.25fr to max-content later*/
 }
-.notice-bg {
-    background:rgba(0, 0, 0, 0.4);
-    width: 100%;
-    height: 100%;
+#download-queue {
+    grid-column: 3 / 4;
+    background: var(--bg-primary);
+}
+
+/*second level - main-screen*/
+#searchHolder {
     z-index: 2;
-    position: absolute;
+    grid-row:  1 / 2;
+    border-bottom-right-radius: var(--bradius);
+    grid-column: 1 / 2;
 }
-code {
-    background: #1f1f1f;
-    padding: 2px;
-    border-radius: 5px;
+#searchHolderbg {
+    background: var(--bg-primary);
+    grid-row:  1 / 2;
+    grid-column: 1 / 2;
 }
-.main * {
-    --matter-helper-theme: 165, 117, 98;
-    --matter-onsurface-rgb: 163, 165, 170;
-}
-.matter-textfield-outlined > input:focus, .matter-textfield-outlined > textarea:focus {
-    border-top-color: transparent !important;
-}
-.noselect {
-    user-select: none;
-}
-
-/*search*/
-.search-options {
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-.suggestions-textarea, #results {
-    resize: none;
-}
-.gen {
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
-    height: auto !important;
-}
-
-/*sugestions ul*/
-#suggestions-ul {
-    padding-inline-start: 0px;
-    list-style-type: none;
-    position: absolute;
-    background-color: #232323 !important;
-    z-index: 2;
-    width: 100%;
-    border: 1px solid #222222;
-    border-radius: 3px;
-    margin-top: 0%;
-}
-.inline-suggestion {
-    width: 100%;
-    padding: 2px 5px 2px 5px;
-    border-radius: 3px;
-
-}
-.inline-suggestion:hover {
-    background: #222222;
-    cursor: pointer;
+#primaryPick {
+    grid-row: 2 / 3;
+    background: darkkhaki;
+    border-top-left-radius: var(--bradius);
     
 }
-.inline-suggestion:active {
-    background:#282828;
-}
-.highlight {background: rgba(165, 117, 98, 0.2) !important;}
-.hl, #eps-done, #percentage, .dl-range {color: #a57562}
-
-.suggestions-preview-image {
-    position: absolute;
-    width: 20%;
-    top: 50%;
-    right: 0;
-    transform: translate(120%, -18.5%);
-    max-width: 20%;
-    max-height: 50vh;
-}
-#preview-img {
-    object-fit: cover;
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-    max-height: inherit;
+#secondaryPick {
+    grid-row: 3 / 4;
+    background: bisque;
 }
 
-/*download things*/
-.dl-wrapper {
-    visibility: hidden;
+/*second level - sidebar*/
+#nameHolder {
+    grid-row:  1 / 2;
+    background: chartreuse;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-#dltofolder {
-    margin-top: 5px;
+#dl-options {
+    grid-row: 2 / 4;
+    background: coral;
 }
-hr {
-    border: 1px solid transparent;
-    height: 5px;
-    border-top: var(--grayborder) !important;
-    margin: 5px 0px 0px 0px
+/*#sources {
+    grid-row: 3 / 4;
+    background: pink;
+}*/
+
+#nameHolder, body, #dl-options, #searchHolder {
+    background: var(--bg-secondary);
 }
-.dl-item {
-    background: #262626;
-    padding: 10px 10px 1px 10px;
-    border: var(--grayborder);
-    border-radius: 5px;
-    margin-top: 5px;
+#primaryPick, #secondaryPick {
+    background: var(--bg-primary);
 }
-.dl-progress-div {
-    width: 100%;
-    margin-top: 10px !important;
-}
-.dl-progress-div progress {
-    width: 100%;
-    -webkit-appearance: none;
-}
-.dl-button {
-    float: right;
-    background:#262626;
-    padding: 0px !important;
-    height: 30px !important;
-    width: 30px !important; 
-    min-width: 30px !important;
-    font-size: 20px !important;
-    text-align: center; 
-    line-height: 28px;
-    margin: -5px 0px 0px 2.5px
-}
-.dl-buttons {
-    float: right;
-}
-.dl-info {
-    line-height: 20px;
-}
-.dl-pause {
-    padding-left: 1px !important;
-}
-::-webkit-progress-bar {
-    border-radius: 3px;
-    background-color: #222222 !important;
-    height: 7px;
-}
-::-webkit-progress-value {
-    border-radius: 3px;
-    background-color: #a57562 ;
-    height: 7px;
-    transition: all 0.5s;
-}
-.info-button {
-    padding: 5px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: transparent;
-    border: none;
-    color: #a3a5aa;
-    outline: 0px transparent;
-    transition: color 0.05s;
-    user-select: none;
-    cursor: pointer;
-}
-.info-button:active {
-    background: transparent;
-    border: none;
-    color: #4f4f50;
-}
-.incognito {
-    background: transparent;
-    color: #a3a5aa;
-    outline: 0px transparent;
-    transition: color 0.05s;
-    user-select: none;
-    cursor: pointer;
-    border: none;
-    text-decoration: underline;
-}
-.incognito:active {
-    border: none;
-    color: #4f4f50;
-}
-.right {
-    float: right;
+#primaryPick {
+    
 }
 
-/*error handling*/
-#errorhandling {
-    display: none;
-}
-
-/*yugen result stuff*/
-.yugen-results {
-    display: grid;
-    grid-template: auto / repeat(4, 1fr);
-    grid-gap: 0.5rem;
-}
-.yugen-scroller {
-    overflow-y: auto;
-    height: 70vh;
-    padding: 1rem;
-}
-.yugen-scroller::-webkit-scrollbar-track{
-	border-radius: 10px;
-	background-color: #232323;
-    border: 1px solid #444444;
-}
-.yugen-scroller::-webkit-scrollbar{
-	width: 12px;
-	background-color: #232323;
-    border-radius: 10px;
-    border: 1px solid #444444;
-}
-.yugen-scroller::-webkit-scrollbar-thumb{
-	border-radius: 10px;
-	background-color: #444444;
-}
-
-.yugen-result {
-    height: 19rem;
-    width: auto;
-    position: relative;
-    display: grid;
-    grid-template: minmax(8rem, 19rem) auto / 100%;
-    box-sizing: border-box;
-    background: #282828;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 1px 1px 20px 0px rgba(0,0,0,0.34);
-}
-.yugen-img {
-    overflow: hidden;
-    position: relative;
-}
-.yugen-a {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-.yugen-a img {
-    width: 100%;
-    max-width: 100%;
-    height: 100%;
-    border: 0;
-    margin: 0;
-    padding: 0;
-    object-fit: cover;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-.yugen-result-title {
-    font-size: 0.8125rem;
-    margin: 0rem;
-    padding: 0.3rem;
-}
-#yugen-close {
-    float: right;
-    font-family: monospace;
-    cursor: pointer;
-}
-#yugen-close:hover {
-    opacity: 50%;
-}
-
-/*small extract from w3 css*/
-html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}
-/* Extract from normalize.css by Nicolas Gallagher and Jonathan Neal git.io/normalize */
-html{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}
-article,aside,details,figcaption,figure,footer,header,main,menu,nav,section{display:block}summary{display:list-item}
-audio,canvas,progress,video{display:inline-block}progress{vertical-align:baseline}
-audio:not([controls]){display:none;height:0}[hidden],template{display:none}
-a{background-color:transparent}a:active,a:hover{outline-width:0}
-abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}
-b,strong{font-weight:bolder}dfn{font-style:italic}mark{background:#ff0;color:#000}
-small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
-sub{bottom:-0.25em}sup{top:-0.5em}figure{margin:1em 40px}img{border-style:none}
-code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}hr{box-sizing:content-box;height:0;overflow:visible}
-button,input,select,textarea,optgroup{font:inherit;margin:0}optgroup{font-weight:bold}
-button,input{overflow:visible}button,select{text-transform:none}
-button,[type=button],[type=reset],[type=submit]{-webkit-appearance:button}
-button::-moz-focus-inner,[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{border-style:none;padding:0}
-button:-moz-focusring,[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring{outline:1px dotted ButtonText}
-fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:.35em .625em .75em}
-legend{color:inherit;display:table;max-width:100%;padding:0;white-space:normal}textarea{overflow:auto}
-[type=checkbox],[type=radio]{padding:0}
-[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}
-[type=search]{-webkit-appearance:textfield;outline-offset:-2px}
-[type=search]::-webkit-search-decoration{-webkit-appearance:none}
-::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}
-/* End extract */
-
-html,body{font-family:Verdana,sans-serif;font-size:15px;line-height:1.5}html{overflow-x:hidden}
-h1{font-size:36px}h2{font-size:30px}h3{font-size:24px}h4{font-size:20px}h5{font-size:18px}h6{font-size:16px}
-.w3-serif{font-family:serif}.w3-sans-serif{font-family:sans-serif}.w3-cursive{font-family:cursive}.w3-monospace{font-family:monospace}
-h1,h2,h3,h4,h5,h6{font-family:"Segoe UI",Arial,sans-serif;font-weight:400;margin:10px 0}.w3-wide{letter-spacing:4px}
-hr{border:0;border-top:1px solid #eee;margin:20px 0}
-.w3-container:after,.w3-container:before,.w3-panel:after,.w3-panel:before,.w3-row:after,.w3-row:before,.w3-row-padding:after,.w3-row-padding:before,
-.w3-cell-row:before,.w3-cell-row:after,.w3-clear:after,.w3-clear:before,.w3-bar:before,.w3-bar:after{content:"";display:table;clear:both}

@@ -1,75 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>twist-dl gui</title>
-    <link rel="stylesheet" href="matter.css">
-    <link rel="stylesheet" href="main.css">
-</head>
-<body style="background: white;">
-    <div class="w3-container main">
-        <h1>twist.moe downloader</h1>
-        <article>
-            <label class="matter-checkbox">
-                <input type="checkbox" id="langselect">
-                <span class="noselect">Search in english</span>
-            </label>
-            <span class="noselect" style="float: right;" id="wait-msg">Getting list of anime from <span class="hl">twist.moe</span>..</span>
-            <label class="matter-textfield-outlined search">
-                <input placeholder = " " id="search" type="text" autocomplete="off" spellcheck="false" disabled>
-                <span class="noselect">Search anime</span>
-                <ul id="suggestions-ul">
-                    <!--
-                    <li class="inline-suggestion">Rascal Does not dream of a bunny girl senpai<li/>
-                    <li class="inline-suggestion">Rent a girlfriend<li/>
-                    <li class="inline-suggestion">Attack on titan<li/>
-                    -->
-                </ul>
-                <div class="suggestions-preview-image">
-                    <img id="preview-img" draggable="false">
-                </div>
-            </label>
-            <span class="ep">
-                <label class="matter-textfield-outlined">
-                    <input placeholder=" " id="first-ep"> 
-                    <span class="noselect" id="first-ep-label">first episode</span>
-                </label>
-                <label class="matter-textfield-outlined">
-                    <input placeholder=" " id="last-ep">
-                    <span class="noselect" id="last-ep-label">last episode</span>
-                </label>
-                <button class="matter-button-outlined gen" id="path">Select folder</button>
-                <button class="matter-button-outlined gen" id="gen">Download</button>
-            </span>
-            <div id="dltofolder"><span class="hl">Downloading to: </span><span id="dlpath">No folder selected</span></div>
-            <div id="errorhandling"><span class="hl">Error: </span>Ctrl + Shift + I <span class="hl">or</span> View > Toggle Developer Tools > Console <span class="hl">to see it. </span><button class="dl-button matter-button-outlined" onclick="document.getElementById('errorhandling').style.display = 'none'">&times;</button></div>
-            <div class="dl-wrapper">
-                <hr>
-                <span class = "dl-info">
-                    <span><span class="hl dl-message">Downloading:</span> <span class="dl-animename">~</span> <span class="dl-range">1-12</span></span> - 
-                    <span><span id="eps-done">0</span> episodes finished</span>
-                </span>
-                <div class="dl-item">
-                    <div><span id="dl-filename">[HorribleSubs] One-Punch Man - 01 [1080p].mp4</span><label style="float: right" id="percentage">0%</label></div> 
-                    <div class="dl-progress-div"><progress type="range" value="0" min="0" max="100" id="progress-progress"></progress></div>
-                </div>
+    <head>
+        <meta charset="UTF-8">
+        <title>twist-dl gui</title>
+        <link rel="stylesheet" href="matter.css">
+        <link rel="stylesheet" href="./node_modules/@material-icons/font/css/all.css">
+        <link rel="stylesheet" href="./node_modules/roseboxlib/roseboxlib.css" >
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <div id="main-grid">
+            <div id="sidebar">
+                <div id="nameHolder"><h4>Impaler</h4></div>
+                <div id="dl-options"></div>
+                <div id="sources"></div>
             </div>
-            <span style="display: none;">
-                <label class="matter-checkbox">
-                    <input type="checkbox" id="yugenselect">
-                    <span class="noselect">Download missing from yugenani.me</span>
-                </label>
-                <button class="incognito" id="yugen-whats-this">what's this?</button>
-            </span>
-            <div id="yugen-wrapper" style="display: none;">
-                <button class="matter-button-outlined" id="yugensearch" style="display: none">search</button>
-                <span id="yugen-results-num"></span>
-                <button class="matter-button-outlined" id="pickresult" style="display: none">Select which one</button>
-                <div id="yugen-url"></div>
+            <div id="main-screen">
+                <div id="searchHolderbg"></div>
+                <div id="searchHolder">
+                    <label class="matter-textfield-outlined">
+                        <input placeholder=" "/>
+                        <span>Search anime</span>
+                    </label>
+                </div>
+                <div id="primaryPick"></div>
+                <div id="secondaryPick"></div>
             </div>
-            
-        </article>
-        <button class="info-button">&#x1F6C8;</button>
-    </div>
-</body>
+            <div id="download-queue"></div>
+        </div>
+    </body>
 </html>
