@@ -3,6 +3,8 @@ const utils = require('./node_modules/roseboxlib/utils.js')
 const electron = require('electron').remote,
 dialog = electron.dialog
 
+//new name is Silencer
+
 //import sources
 //TODO go through all files in sources dir and import them
 const twist = require('./sources/twist.source.js')
@@ -20,8 +22,12 @@ function main() { //rest of the stuff
     console.log("done")
 }
 
+//TODO finish dummy frontend full first
+//TODO search icon
+
 
 //initialize sources
+//TODO handle fail notifying in twists file
 async function initSources() {
     var fetched = await sourceHandler.twist.init();
     if (fetched == false) {

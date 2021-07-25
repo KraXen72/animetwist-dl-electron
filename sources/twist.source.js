@@ -28,7 +28,7 @@ var
     yugenurl
 
 //inital get Anime
-async function init() {
+async function getAnime() {
 
     let isDone = false;
     let retryCount = 0;
@@ -48,6 +48,8 @@ async function init() {
     console.log("twist: allAnime", allAnime)
     return isDone
 }
+
+//init - run this at the start - basically tries to getAnime
 
 function fetchAnime(index) {
     return allAnime[index]
@@ -73,4 +75,4 @@ function getJSON(endpoint){ //intereact with the twist.moe api
 
 
 
-module.exports = { init }
+module.exports = { getAnime, fetchAnime }
