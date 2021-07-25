@@ -9,6 +9,8 @@
 
     height: 100vh;
     width: 100vw;
+    max-height: 100vh;
+    max-width: 100vw;
 }
 #main-grid *, .popup-body * {
     --matter-helper-theme: 165, 117, 98 !important;
@@ -43,6 +45,7 @@
 #download-queue {
     grid-column: 4 / 5;
     grid-row: 2 / 3;
+    padding: 0 0.8rem;
 }
 
 #searchHolder {
@@ -84,7 +87,7 @@
 #dl-options {
     grid-row: 1 / 3;
     background: coral;
-    padding: 0 0.5rem;
+    padding: 0 0.8rem;
 }
 #sources {
     grid-row: 2 / 3;
@@ -93,14 +96,17 @@
 }
 
 /*colors*/
-#nameHolder, body, #dl-options {
-    background: var(--bg-primary);
-}
-#primaryPick, #secondaryPick, #searchHolder, #dlnameHolder {
+#nameHolder, body, #dl-options, #searchHolder, #dlnameHolder {
+    /*background: var(--bg-primary);*/
     background: var(--bg-secondary);
+}
+#primaryPick, #secondaryPick {
+    /*background: var(--bg-secondary);*/
+    background: var(--bg-primary);
 }
 #download-queue {
     background: var(--bg-secondary) !important;
+    overflow-y: scroll;
 }
 
 /*nameholders*/
@@ -180,4 +186,44 @@
 }
 #dl-button-container .fat-button {
     flex-grow: 1;
+}
+
+/*resize holder*/
+#resizeHandle {
+    grid-area: 1 / 3 / 3 / 4;
+    background: rgba(165, 117, 98, 0.2)
+}
+
+/*dl queue*/
+#dl-scroller {
+    width: 100%;
+}
+#dl-overallProgress {
+    position: sticky;
+    bottom: 0;
+}
+
+/*download queue items*/
+.dl-queue-item {
+    display: grid;
+    grid-template: 1fr 1fr / 1fr;
+    gap: 0.2rem;
+    padding: 0.5rem 0.1rem;
+}
+.dl-qitem-title { 
+    grid-area: 1 / 1 / 2 / 2; 
+    padding: 0 0.5rem;
+}
+.dl-qitem-progressHold {
+    grid-area: 2 / 1 / 3 / 2;
+    display: flex;
+    align-items: center;
+}
+.dl-qitem-progressBar {
+    flex-grow: 1;
+    width: 100%;
+    background: var(--fg-rosebox);
+    margin: 0.2rem;
+    height: 0.4rem;
+    border-radius: 5rem;
 }
