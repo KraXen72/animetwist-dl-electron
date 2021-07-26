@@ -236,6 +236,7 @@
     border-radius: 5rem;
 }
 
+/*download icons*/
 .dl-downloadedIcon {
     color: lightgreen;
 }
@@ -244,4 +245,27 @@
 }
 .dl-downloadingIcon {
     color: var(--fg-rosebox);
+}
+
+/*download toggle*/
+#dl-dlProgressNum {
+    background: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    padding: 0 0.1rem;
+}
+#dl-dlProgressToggle {
+    display: flex;
+    justify-content: center;
+    width: min-content;
+    cursor: pointer;
+}
+.dl-scroller-hideCompleted .dl-queue-item.dl-queue-item-done {
+    display: none;
+}
+#dl-dlProgressNum #dl-dlProgressToggle.dl-shown .md-visibility_off {
+    display: none;
+}
+#dl-dlProgressNum #dl-dlProgressToggle.dl-hidden .md-visibility {
+    display: none;
 }

@@ -4,7 +4,7 @@
   "dependencies": {
     "@material-icons/font": "^1.0.12",
     "crypto-js": "^4.0.0",
-    "electron": "^11.2.2",
+    "electron": "^13.1.7",
     "roseboxlib": "https://github.com/KraXen72/roseboxlib.git",
     "youtube-dl-wrap": "^2.0.0"
   },
