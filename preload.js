@@ -17,10 +17,16 @@ sourceHandler.twist = twist
 
 console.log(sourceHandler);
 
-initSources()
+//initSources()
 function main() { //rest of the stuff
-    console.log("done")
+    console.log("sources loaded done")
 }
+
+//UI ONLY eventlisteners
+document.addEventListener('DOMContentLoaded', () => {
+    //ui stuff
+    document.getElementById('dl-dlProgressToggle').addEventListener("click", toggleDoneVisibility)
+})
 
 //TODO finish dummy frontend full first
 //TODO search icon
@@ -43,4 +49,26 @@ async function initSources() {
     }
     console.log(fetched);
     main()
+}
+
+//Ui related stuff
+/**
+ * set up toggle for show/hide completed downloads
+ */
+function toggleDoneVisibility() {
+    let toggle = document.getElementById('dl-dlProgressToggle')
+    let scroller = document.getElementById('dl-scroller')
+
+    if (toggle.classList.contains('dl-hidden')) {
+        toggle.classList.remove('dl-hidden')
+        toggle.classList.add('dl-shown')
+
+        scroller.classList.remove('dl-scroller-hideCompleted')
+    } else {
+        toggle.classList.add('dl-hidden')
+        toggle.classList.remove('dl-shown')
+
+        scroller.classList.add('dl-scroller-hideCompleted')
+    }
+
 }
