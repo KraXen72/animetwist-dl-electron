@@ -1,94 +1,259 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Silencer</title>
-        <link rel="stylesheet" href="matter.css">
-        <link rel="stylesheet" href="./node_modules/@material-icons/font/css/all.css">
-        <link rel="stylesheet" href="./node_modules/roseboxlib/roseboxlib.css" >
-        <link rel="stylesheet" href="main.css">
-    </head>
-    <body>
-        <div id="main-grid" class="ncollapsed-dl">
-            <div id="sidebar" class="main-grid-item">
-                <div id="dl-options">
-                    <hr class="hr-text hr-secondary" data-content="Options">
-                    <span class="sidebar-subtitle ml">Episode range to download:</span>
-                    <label class="matter-textfield-outlined sidebar-input" id = "first-ep-label">
-                        <input placeholder=" "/ id="first-ep">
-                        <span>First episode</span>
-                    </label>
-                    <label class="matter-textfield-outlined sidebar-input" id = "last-ep-label">
-                        <input placeholder=" "/ id="last-ep">
-                        <span>Last episode</span>
-                    </label>
-                    <div id="dl-button-container">
-                        <button class="matter-button-outlined mdicontext fat-button mr" title="Destination directory">
-                            <span class="material-icons-round md-folder" ></span>
-                        </button>
-                        <button class="matter-button-outlined mdicontext fat-button">
-                            <span class="material-icons-round md-download"></span>
-                        </button>
-                    </div>
-                    <hr class="hr-text hr-secondary" data-content="Downloading to:">
-                    <span class="sidebar-subtitle ml">No folder selected</span>
-                    
-                </div>
-                <div id="sources"></div>
-            </div>
-            <div id="nameHolder" class="noselect main-grid-item"><h4>Silencer</h4><span class="imgHolder"><img src="icons/2x.png" alt="Silencer"></span></div>
-            <div id="searchHolderbg" class="main-grid-item"></div>
-            <div id="searchHolder" class="main-grid-item">
-                <label class="matter-textfield-outlined" id = "search-label">
-                    <input placeholder=" "/ id="search">
-                    <span id="search-span noselect">Start typing the name of the anime you want to download...</span>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Silencer</title>
+    <link rel="stylesheet" href="matter.css">
+    <link rel="stylesheet" href="./node_modules/@material-icons/font/css/all.css">
+    <link rel="stylesheet" href="./node_modules/roseboxlib/roseboxlib.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div id="main-grid" class="ncollapsed-dl">
+        <div id="sidebar" class="main-grid-item">
+            <div id="dl-options">
+                <hr class="hr-text hr-secondary" data-content="Options">
+                <span class="sidebar-subtitle ml">Episode range to download:</span>
+                <label class="matter-textfield-outlined sidebar-input" id="first-ep-label">
+                    <input placeholder=" " / id="first-ep">
+                    <span>First episode</span>
                 </label>
+                <label class="matter-textfield-outlined sidebar-input" id="last-ep-label">
+                    <input placeholder=" " / id="last-ep">
+                    <span>Last episode</span>
+                </label>
+                <div id="dl-button-container">
+                    <button class="matter-button-outlined mdicontext fat-button mr" title="Destination directory">
+                        <span class="material-icons-round md-folder"></span>
+                    </button>
+                    <button class="matter-button-outlined mdicontext fat-button">
+                        <span class="material-icons-round md-download"></span>
+                    </button>
+                </div>
+                <hr class="hr-text hr-secondary" data-content="Downloading to:">
+                <span class="sidebar-subtitle ml">No folder selected</span>
+
             </div>
-            <div id="main-screen" class="main-grid-item">
-                <div id="primaryPick" class="sourcepick">
-                    <h5 class="src-title">1. <strong>Primary source:</strong> pick the show you meant <span class="src-title-source">(twist.moe)</span></h5>
-                    <div class="previewHolder" id="prevhold1">
-                        <img src="thumb.jpg" alt="" id="prev1" class="previmg noselect" draggable="false">
-                    </div>
-                    <ul id="src-pick1" class="src-pick">
-                        <li class="src-pick-li">One Piece</li>
-                        <li class="src-pick-li">One Piece</li>
-                    </ul>
+            <div id="sources"></div>
+        </div>
+        <div id="nameHolder" class="noselect main-grid-item">
+            <h4>Silencer</h4><span class="imgHolder"><img src="icons/2x.png" alt="Silencer"></span>
+        </div>
+        <div id="searchHolderbg" class="main-grid-item"></div>
+        <div id="searchHolder" class="main-grid-item">
+            <label class="matter-textfield-outlined" id="search-label">
+                <input placeholder=" " / id="search">
+                <span id="search-span noselect">Start typing the name of the anime you want to download...</span>
+            </label>
+        </div>
+        <div id="main-screen" class="main-grid-item">
+            <div id="primaryPick" class="sourcepick">
+                <h5 class="src-title">1. <strong>Primary source:</strong> pick the show you meant <span
+                        class="src-title-source">(twist.moe)</span></h5>
+                <div class="previewHolder" id="prevhold1">
+                    <img src="thumb.jpg" alt="" id="prev1" class="previmg noselect" draggable="false">
                 </div>
-                <div id="secondaryPick" class="sourcepick">
-                    <h5 class="src-title">2. <strong>Secondary source:</strong> pick the show you meant <span class="src-title-source">(11anime.fr)</span></h5>
-                    <div class="previewHolder" id="prevhold2">
-                        <img src="thumb.jpg" alt="" id="prev2" class="previmg noselect" draggable="false">
-                    </div>
-                    <ul id="src-pick2" class="src-pick">
-                        <li class="src-pick-li">One Piece</li>
-                        <li class="src-pick-li">One Piece</li>
-                    </ul>
-                </div>
+                <ul id="src-pick1" class="src-pick">
+                    <li class="src-pick-li">One Piece</li>
+                    <li class="src-pick-li">One Piece</li>
+                </ul>
             </div>
-            <div id="resizeHandle"></div>
-            <div id="dlnameHolder" class="noselect main-grid-item"><h4>Downloads</h4></div>
-            <div id="download-queue" class="main-grid-item">
-                <div id="dl-scroller">
-                    <div class="dl-queue-item">
-                        <div class="dl-qitem-title">One Piece episode 1</div>
-                        <div class="dl-qitem-progressHold">
-                            <div class="dl-qitem-progressBar"></div>
-                            <div class="dl-qitem-progressPerc">100%</div>
-                        </div>
-                    </div>
-                    <div class="dl-queue-item">
-                        <div class="dl-qitem-title">One Piece episode 1</div>
-                        <div class="dl-qitem-progressHold">
-                            <div class="dl-qitem-progressBar"></div>
-                            <div class="dl-qitem-progressPerc">100%</div>
-                        </div>
-                    </div>
+            <div id="secondaryPick" class="sourcepick">
+                <h5 class="src-title">2. <strong>Secondary source:</strong> pick the show you meant <span
+                        class="src-title-source">(11anime.fr)</span></h5>
+                <div class="previewHolder" id="prevhold2">
+                    <img src="thumb.jpg" alt="" id="prev2" class="previmg noselect" draggable="false">
                 </div>
-                <!--<div id="dl-overallProgress">
-                    poggers
-                </div>-->
+                <ul id="src-pick2" class="src-pick">
+                    <li class="src-pick-li">One Piece</li>
+                    <li class="src-pick-li">One Piece</li>
+                </ul>
             </div>
         </div>
-    </body>
+        <div id="resizeHandle"></div>
+        <div id="dlnameHolder" class="noselect main-grid-item">
+            <h4 id="dlnameHolderh4"></span>Downloads</span></h4>
+            <h4 id="dl-dlProgressNum">1/20</h4>
+        </div>
+        <div id="download-queue" class="main-grid-item">
+            <div id="dl-scroller">
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 1</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-done dl-downloadedIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 2</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-downloading dl-downloadingIcon"></span>
+                    </div>
+                </div>
+                <div class="dl-queue-item">
+                    <div class="dl-qitem-title">One Piece episode 3</div>
+                    <div class="dl-qitem-iconHold mdicontext">
+                        <span class="material-icons-round md-schedule dl-queuedIcon"></span>
+                    </div>
+                </div>
+
+            </div>
+            <!--<div id="dl-overallProgress">
+                    poggers
+                </div>-->
+        </div>
+    </div>
+</body>
+
 </html>
