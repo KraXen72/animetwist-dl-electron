@@ -1,4 +1,4 @@
-# twist.moe / AnimeTwist downloader
+# THIS BRANCH IS NOT READY YET. COME BACK LATER
 an easy to use downloader from twist.moe.  
 ![img](https://cdn.discordapp.com/attachments/704792091955429426/806973238638542939/Rec_2021_02.04_2042.gif)
 ## Features
