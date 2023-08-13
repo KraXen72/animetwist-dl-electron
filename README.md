@@ -1,3 +1,12 @@
+# Unmaintained - [twist.moe](https://twist.moe) no longer exists  
+For alternatives, try:
+- Torrenting from nyaa
+- Judas Encodes (smaller size), Judas Encodes DDL google drive (find invite in their discord, recommended to use with AirExplorer on win and google drive app on Phone)
+- [this gogoanime downloader userscript](https://greasyfork.org/en/scripts/465970-anilink-gogoanime)
+- [Aniyomi](https://github.com/aniyomiorg/aniyomi) / [Animiru (Aniyomi fork)](https://github.com/Quickdesh/Animiru)
+  
+The repo will be still kept as an archive, mostly for the typeahead implementation and youtube-dl integration. See old README below.
+
 # twist.moe / AnimeTwist downloader
 an easy to use downloader from twist.moe.  
 ![img](https://cdn.discordapp.com/attachments/704792091955429426/806973238638542939/Rec_2021_02.04_2042.gif)
